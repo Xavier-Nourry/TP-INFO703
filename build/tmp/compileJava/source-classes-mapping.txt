@@ -2,10 +2,10 @@ fr/usmb/m1isc/compilation/tp/sym.java
  fr.usmb.m1isc.compilation.tp.sym
 fr/usmb/m1isc/compilation/tp/ArbreAbstrait.java
  fr.usmb.m1isc.compilation.tp.ArbreAbstrait
+fr/usmb/m1isc/compilation/tp/LexicalAnalyzer.java
+ fr.usmb.m1isc.compilation.tp.LexicalAnalyzer
 fr/usmb/m1isc/compilation/tp/parser.java
  fr.usmb.m1isc.compilation.tp.parser
  fr.usmb.m1isc.compilation.tp.parser$CUP$parser$actions
-fr/usmb/m1isc/compilation/tp/LexicalAnalyzer.java
- fr.usmb.m1isc.compilation.tp.LexicalAnalyzer
 fr/usmb/m1isc/compilation/tp/Main.java
  fr.usmb.m1isc.compilation.tp.Main

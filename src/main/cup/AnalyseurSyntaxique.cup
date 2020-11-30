@@ -67,7 +67,7 @@ sequence ::= expression:e1 SEMI sequence:e2 {:RESULT = new ArbreAbstrait(";", e1
 expression ::= expr:e {:RESULT = e;:}
              | LET IDENT:nom EGAL expr:e {:RESULT = new ArbreAbstrait("let", new ArbreAbstrait(nom), e);:}
              | WHILE expr:cond DO expression:e 
-             | IF expr:cond THEN expression:a1 ELSE expression:a2 
+             | IF expr:cond THEN expression:a1 ELSE expression:a2 {:RESULT = new ArbreAbstrait("if", cond, a1, a2);:}
              | error {:RESULT = new ArbreAbstrait("ERREUR");:} // reprise d'erreurs
 			 ;
 

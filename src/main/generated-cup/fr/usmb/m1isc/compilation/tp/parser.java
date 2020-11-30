@@ -393,7 +393,7 @@ class CUP$parser$actions {
 		int a2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int a2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		ArbreAbstrait a2 = (ArbreAbstrait)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-
+		RESULT = new ArbreAbstrait("if", cond, a1, a2);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("expression",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
