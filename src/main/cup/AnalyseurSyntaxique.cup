@@ -68,7 +68,7 @@ expression ::= expr:e {:RESULT = e;:}
              | LET IDENT:nom EGAL expr:e {:RESULT = new ArbreAbstrait("let", new ArbreAbstrait(nom), e);:}
              | WHILE expr:cond DO expression:e 
              | IF expr:cond THEN expression:a1 ELSE expression:a2 
-             | error // reprise d'erreurs
+             | error {:RESULT = new ArbreAbstrait("ERREUR");:} // reprise d'erreurs
 			 ;
 
 // 
@@ -86,7 +86,7 @@ expr ::= NOT:op expr:e
 	   | MOINS expr:e  {: RESULT = new ArbreAbstrait("-", e); :}			 %prec MOINS_UNAIRE
 	   | OUTPUT expr:e
 	   | INPUT
-	   | NIL
+	   | NIL {:RESULT = new ArbreAbstrait("NIL");:}
 	   | ENTIER:n {:RESULT = new ArbreAbstrait(n.toString());:}
 	   | IDENT:id {:RESULT = new ArbreAbstrait(id);:}
 	   | PAR_G sequence:e PAR_D {:RESULT = e;:}

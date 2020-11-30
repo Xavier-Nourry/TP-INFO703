@@ -402,7 +402,7 @@ class CUP$parser$actions {
           case 9: // expression ::= error 
             {
               ArbreAbstrait RESULT =null;
-
+		RESULT = new ArbreAbstrait("ERREUR");
               CUP$parser$result = parser.getSymbolFactory().newSymbol("expression",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -609,7 +609,7 @@ class CUP$parser$actions {
           case 24: // expr ::= NIL 
             {
               ArbreAbstrait RESULT =null;
-
+		RESULT = new ArbreAbstrait("NIL");
               CUP$parser$result = parser.getSymbolFactory().newSymbol("expr",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
