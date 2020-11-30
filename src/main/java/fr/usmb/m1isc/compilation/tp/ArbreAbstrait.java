@@ -5,6 +5,8 @@ public class ArbreAbstrait {
     private ArbreAbstrait filsDroit;
     private String valeur;
 
+    public ArbreAbstrait(String valeur, ArbreAbstrait filsGauche) {this(valeur, filsGauche, null);}
+
     public ArbreAbstrait(String valeur){
         this(valeur, null, null);
     }
