@@ -6,4 +6,4 @@
 
 let prixHt = nil;   /* une variable prend valeur lors de sa déclaration */
 let prixTtc =  prixHt * 119 / 100;
-prixTtc + 100.
+output (input + 100).
