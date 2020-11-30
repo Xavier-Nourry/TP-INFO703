@@ -72,9 +72,9 @@ expression ::= expr:e {:RESULT = e;:}
 			 ;
 
 // 
-expr ::= NOT:op expr:e
-	   | expr:e1 AND expr:e2
-	   | expr:e1 OR expr:e2
+expr ::= NOT:op expr:e {:RESULT = new ArbreAbstrait("not", e, null);:}
+	   | expr:e1 AND expr:e2 {:RESULT = new ArbreAbstrait("and", e1, e2);:}
+	   | expr:e1 OR expr:e2 {:RESULT = new ArbreAbstrait("or", e1, e2);:}
 	   | expr:e1 EGAL expr:e2 {:RESULT = new ArbreAbstrait("=", e1, e2);:}
 	   | expr:e1 GT expr:e2 {:RESULT = new ArbreAbstrait("<", e1, e2);:}
 	   | expr:e1 GTE expr:e2 {:RESULT = new ArbreAbstrait("<=", e1, e2);:}
