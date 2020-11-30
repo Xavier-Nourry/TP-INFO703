@@ -12,4 +12,4 @@
 /*.ipr
 /*.iws
 /**/generated-*
-/.idea/
+/.gradle/
