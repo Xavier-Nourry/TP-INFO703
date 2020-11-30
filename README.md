@@ -1,5 +1,16 @@
+Camille Morand - Xavier Nourry
+
 # TP Compilation : Génération d'arbres abstraits
 
+## Rendu:
+
+Les seuls fichiers modifiés sont: 
+- le fichier src/main/java/fr/usmb/m1isc/compilation/tp/ArbreAbstrait.java
+- le fichier src/main/cup/AnalyseurSyntaxique.cup
+                                  
+Pour faire tourner l'algorithme il faut build le projet avec gradle puis lancer le main.java. Le programme est plus rapide si on l'appelle directement avec un fichier source en argument.
+
+##
 L'objectif du TP est d'utiliser les outils JFlex et CUP pour générer des arbres abstraits correspondant à un sous ensemble du langage **λ-ada**.
 
 ## Exercice 1 :
