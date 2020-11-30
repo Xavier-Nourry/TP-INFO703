@@ -1,3 +1,3 @@
-let a = true;
-let b = false;
-let c = a and b.
+while (0 < b)
+do (let aux=(a mod b); let a=b; let b=aux );
+let a = 2.
