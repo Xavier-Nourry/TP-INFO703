@@ -43,24 +43,27 @@ public class ArbreAbstrait {
     }
 
     public String toAsm(){
-        String dataSegment = "DATA SEGMENT\n";
+
+        //Génération des déclarations
+        DataSegment dataSegment = new DataSegment();
+        genereDeclarations(dataSegment);
+
         String codeSegment = "CODE SEGMENT\n";
 
         //Génération des instructions
         codeSegment += genereInstructions();
-        dataSegment += genereDeclarations();
 
-        dataSegment += "DATA ENDS\n";
         codeSegment += "CODE ENDS";
-        return dataSegment + codeSegment;
+        return dataSegment.toString() + codeSegment;
     }
 
-    private String genereDeclarations() {
-        if (valeur == ";")
-            return fils1.genereDeclarations() + fils2.genereDeclarations();
+    private void genereDeclarations(DataSegment dataSegment) {
+        if (valeur == ";") {
+            fils1.genereDeclarations(dataSegment);
+            fils2.genereDeclarations(dataSegment);
+        }
         if (valeur == "LET")
-            return "\t" + fils1.valeur + " DD\n";
-        return "";
+            dataSegment.add(fils1.valeur);
     }
 
     private String genereInstructions() {
