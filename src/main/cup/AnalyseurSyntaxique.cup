@@ -54,7 +54,7 @@ precedence left MOINS_UNAIRE;
 /* grammaire */
 // un pg est une sequence d'insctions terminee par point
 program ::= 
-	sequence:s POINT  {:System.out.println(s.toString());:}
+	sequence:s POINT  {:System.out.println(s.toAsm());:}
 	;
 
 // une sequence est une suite d'instructions separes par des point virgules	

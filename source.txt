@@ -1,14 +1,23 @@
-12 + 5;             /* ceci est un commentaire */
-10 / 2 - 3;  99;    /* le point-virgule sépare les expressions à évaluer */
-/* l'évaluation donne toujours un nombre entier */
-((30 * 1) + 4) mod 2; /* opérateurs binaires */
-3 * -4;             /* attention à l'opérateur unaire */
+let prixHt = 200;
+let prixTtc =  prixHt * 119 / 100 .
 
-let prixHt = 200;   /* une variable prend valeur lors de sa déclaration */
-let prixTtc =  prixHt * 119 / 100;
-prixTtc + 100;
-let a = input;
-let b = input;
-while (0 < b)
-do (let aux=(a mod b); let a=b; let b=aux );
-output a .
+/*mov eax, 200
+pop eax
+mov prixHt, eax
+                    MANQUE mov eax, prixHt
+push eax
+pop eax
+mov eax, 119
+pop ebx
+pop eax
+mul eax, ebx
+push eax
+mov eax, 100
+push eax
+pop ebx
+pop eax
+div eax, ebx
+push eax
+pop eax
+mov prixTtc, eax    OK
+push eax*/
