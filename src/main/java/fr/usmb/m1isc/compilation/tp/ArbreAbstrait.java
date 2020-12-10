@@ -41,4 +41,15 @@ public class ArbreAbstrait {
             res = "(" + res + ")";
         return res;
     }
+
+    public String toAsm(){
+        String dataSegment = "DATA SEGMENT\n";
+        String codeSegment = " CODE SEGMENT\n";
+
+        /* Y a plus qu'à !*/
+
+        dataSegment += "DATA ENDS\n";
+        codeSegment += "CODE ENDS";
+        return dataSegment + codeSegment;
+    }
 }
