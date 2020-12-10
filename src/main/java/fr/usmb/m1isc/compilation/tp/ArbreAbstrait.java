@@ -1,5 +1,7 @@
 package fr.usmb.m1isc.compilation.tp;
 
+import java.io.File;
+
 public class ArbreAbstrait {
     // Fils de l'arbre
     private ArbreAbstrait fils1;
@@ -26,6 +28,10 @@ public class ArbreAbstrait {
         this.fils2 = fils2;
         this.fils3 = fils3;
         estFeuille = false;
+    }
+
+    public void toAssembly(String fileToGenerate){
+
     }
 
     // Affiche l'arbre sous la forme d'une expression préfixée parenthésée
