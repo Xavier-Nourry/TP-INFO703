@@ -48,10 +48,19 @@ public class ArbreAbstrait {
 
         //Génération des instructions
         codeSegment += genereInstructions();
+        dataSegment += genereDeclarations();
 
         dataSegment += "DATA ENDS\n";
         codeSegment += "CODE ENDS";
         return dataSegment + codeSegment;
+    }
+
+    private String genereDeclarations() {
+        if (valeur == ";")
+            return fils1.genereDeclarations() + fils2.genereDeclarations();
+        if (valeur == "LET")
+            return "\t" + fils1.valeur + " DD\n";
+        return "";
     }
 
     private String genereInstructions() {
@@ -74,49 +83,50 @@ public class ArbreAbstrait {
     }
 
     private String InstructionVariable() {
-        String res = "mov eax, " + valeur + "\n";
-        res += "push eax\n";
+        String res = "\tmov eax, " + valeur + "\n";
+        res += "\tpush eax\n";
         return res;
     }
 
     private String InstructionsMultiplication() {
         String res = fils1.genereInstructions();
         res += fils2.genereInstructions();
-        res += "pop ebx\n";
-        res += "pop eax\n";
-        res += "mul eax, ebx\n";
-        res += "push eax\n";
+        res += "\tpop ebx\n";
+        res += "\tpop eax\n";
+        res += "\tmul eax, ebx\n";
+        res += "\tpush eax\n";
         return res;
     }
 
     private String InstructionsDivison() {
         String res = fils1.genereInstructions();
         res += fils2.genereInstructions();
-        res += "pop ebx\n";
-        res += "pop eax\n";
-        res += "div eax, ebx\n";
-        res += "push eax\n";
+        res += "\tpop ebx\n";
+        res += "\tpop eax\n";
+        res += "\tdiv eax, ebx\n";
+        res += "\tpush eax\n";
         return res;
     }
 
     private String InstructionsInt() {
-        String res = "mov eax, " + valeur + "\n";
-        res += "push eax\n";
+        String res = "\tmov eax, " + valeur + "\n";
+        res += "\tpush eax\n";
         return res;
     }
 
     private String InstructionsLet() {
         String res = fils2.genereInstructions();
-        res += "pop eax\n";
-        res += "mov " + fils1.valeur + ", eax\n";
-        res += "push eax\n";
+        res += "\tpop eax\n";
+        res += "\tmov " + fils1.valeur + ", eax\n";
+        res += "\tpush eax\n";
         return res;
     }
 
     private String InstructionsPointVirgule() {
         String res = fils1.genereInstructions();
-        res += "pop eax\n";
+        res += "\tpop eax\n";
         res += fils2.genereInstructions();
         return res;
     }
 }
+

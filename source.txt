@@ -1,23 +1,2 @@
 let prixHt = 200;
 let prixTtc =  prixHt * 119 / 100 .
-
-/*mov eax, 200
-pop eax
-mov prixHt, eax
-                    MANQUE mov eax, prixHt
-push eax
-pop eax
-mov eax, 119
-pop ebx
-pop eax
-mul eax, ebx
-push eax
-mov eax, 100
-push eax
-pop ebx
-pop eax
-div eax, ebx
-push eax
-pop eax
-mov prixTtc, eax    OK
-push eax*/
