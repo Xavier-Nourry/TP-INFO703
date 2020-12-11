@@ -9,11 +9,20 @@ public class ArbreMod extends ArbreAbstrait {
 
     @Override
     public String genereInstructions() {
-        return null;
+        String res = fils1.genereInstructions();
+        res += fils2.genereInstructions();
+        res += "\tpop ebx\n";
+        res += "\tpop eax\n";
+        res += "\tmov ecx, eax\n";
+        res += "\tdiv ecx, ebx\n";
+        res += "\tmul ecx, ebx\n";
+        res += "\tsub eax, ecx\n";
+        res += "\tpush eax\n";
+        return res;
     }
 
     @Override
     protected String valeurToString() {
-        return null;
+        return "MOD";
     }
 }
