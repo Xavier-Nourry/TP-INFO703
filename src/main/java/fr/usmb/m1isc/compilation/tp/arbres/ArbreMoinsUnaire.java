@@ -4,13 +4,18 @@ import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
 
 public class ArbreMoinsUnaire extends ArbreAbstrait {
     public int valeur;
-    public ArbreMoinsUnaire(int valeur){
+    public ArbreMoinsUnaire(ArbreAbstrait valeur){
         super();
-        this.valeur = valeur;
+        //this.valeur = valeur;
     }
 
     @Override
-    public void genererCodeAssembleur(String fileToGenerate) {
+    public String genereInstructions() {
+        return null;
+    }
 
+    @Override
+    protected String valeurToString() {
+        return null;
     }
 }

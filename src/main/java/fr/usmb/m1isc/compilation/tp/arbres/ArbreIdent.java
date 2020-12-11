@@ -10,7 +10,14 @@ public class ArbreIdent extends ArbreAbstrait {
     }
 
     @Override
-    public void genererCodeAssembleur(String fileToGenerate) {
+    public String genereInstructions() {
+        String res = "\tmov eax, " + valeur + "\n";
+        res += "\tpush eax\n";
+        return res;
+    }
 
+    @Override
+    protected String valeurToString() {
+        return valeur;
     }
 }

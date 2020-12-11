@@ -2,9 +2,8 @@ package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
 
-public class ArbrePlus extends ArbreAbstrait {
-    public ArbrePlus(ArbreAbstrait f1, ArbreAbstrait f2){
-        super(f1, f2);
+public class ArbreIf extends ArbreAbstrait {
+    public ArbreIf(ArbreAbstrait cond, ArbreAbstrait a1, ArbreAbstrait a2) {
     }
 
     @Override
@@ -16,5 +15,4 @@ public class ArbrePlus extends ArbreAbstrait {
     protected String valeurToString() {
         return null;
     }
-
 }

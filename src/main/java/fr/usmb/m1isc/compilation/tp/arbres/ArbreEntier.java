@@ -5,13 +5,20 @@ import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
 public class ArbreEntier extends ArbreAbstrait{
     public int valeur;
 
-    public ArbreEntier(int valeur, ArbreAbstrait f1, ArbreAbstrait f2) {
-        super(f1, f2);
+    public ArbreEntier(int valeur) {
+        super();
         this.valeur = valeur;
     }
 
     @Override
-    public void genererCodeAssembleur(String fileToGenerate) {
+    public String genereInstructions() {
+        String res = "\tmov eax, " + valeur + "\n";
+        res += "\tpush eax\n";
+        return res;
+    }
 
+    @Override
+    protected String valeurToString() {
+        return String.valueOf(valeur);
     }
 }

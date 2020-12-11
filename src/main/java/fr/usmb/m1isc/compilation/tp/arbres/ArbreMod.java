@@ -8,7 +8,12 @@ public class ArbreMod extends ArbreAbstrait {
     }
 
     @Override
-    public void genererCodeAssembleur(String fileToGenerate) {
+    public String genereInstructions() {
+        return null;
+    }
 
+    @Override
+    protected String valeurToString() {
+        return null;
     }
 }

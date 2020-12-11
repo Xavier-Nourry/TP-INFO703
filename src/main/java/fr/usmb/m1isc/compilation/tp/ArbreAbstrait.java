@@ -1,11 +1,9 @@
 package fr.usmb.m1isc.compilation.tp;
 
-import java.io.File;
-
 public abstract class ArbreAbstrait {
     // Fils de l'arbre
-    private ArbreAbstrait fils1;
-    private ArbreAbstrait fils2;
+    protected ArbreAbstrait fils1;
+    protected ArbreAbstrait fils2;
     private ArbreAbstrait fils3;
 
     // Indique si au le noeud est une feuille (utilisé pour l'affichage)
@@ -28,11 +26,26 @@ public abstract class ArbreAbstrait {
         estFeuille = false;
     }
 
-    public abstract void genererCodeAssembleur(String fileToGenerate);
+    public String genererAssembleur(){
+        //Génération des déclarations
+        DataSegment dataSegment = new DataSegment();
+        genereDeclarations(dataSegment);
+
+        //Génération des instruction
+        String codeSegment = "CODE SEGMENT\n";
+        codeSegment += genereInstructions();
+        codeSegment += "CODE ENDS";
+
+        return dataSegment.toString() + codeSegment;
+    }
+
+    public abstract String genereInstructions();
+
+    public void genereDeclarations(DataSegment dataSegment){}
 
     // Affiche l'arbre sous la forme d'une expression préfixée parenthésée
-    public String toString(){ //TODO : voir si abstract ou non
-        String res = ""; //TODO : voir pour récupérer la valeur proprement
+    public String toString(){
+        String res = valeurToString() + " ";
         if (fils1 != null)
             res += fils1.toString();
         if (fils2 != null)
@@ -44,94 +57,6 @@ public abstract class ArbreAbstrait {
         return res;
     }
 
-    public String toAsm(){
-
-        //Génération des déclarations
-        DataSegment dataSegment = new DataSegment();
-        genereDeclarations(dataSegment);
-
-        String codeSegment = "CODE SEGMENT\n";
-
-        //Génération des instructions
-        codeSegment += genereInstructions();
-
-        codeSegment += "CODE ENDS";
-        return dataSegment.toString() + codeSegment;
-    }
-
-    private void genereDeclarations(DataSegment dataSegment) {
-        if (valeur == ";") {
-            fils1.genereDeclarations(dataSegment);
-            fils2.genereDeclarations(dataSegment);
-        }
-        if (valeur == "LET")
-            dataSegment.add(fils1.valeur);
-    }
-
-    private String genereInstructions() {
-        switch(valeur) {
-            case ";":
-                return InstructionsPointVirgule();
-            case "LET":
-                return InstructionsLet();
-            case "200":
-            case "119":
-            case "100":
-                return InstructionsInt();
-            case "/":
-                return InstructionsDivison();
-            case "*":
-                return InstructionsMultiplication();
-            default:
-                return InstructionVariable();
-        }
-    }
-
-    private String InstructionVariable() {
-        String res = "\tmov eax, " + valeur + "\n";
-        res += "\tpush eax\n";
-        return res;
-    }
-
-    private String InstructionsMultiplication() {
-        String res = fils1.genereInstructions();
-        res += fils2.genereInstructions();
-        res += "\tpop ebx\n";
-        res += "\tpop eax\n";
-        res += "\tmul eax, ebx\n";
-        res += "\tpush eax\n";
-        return res;
-    }
-
-    private String InstructionsDivison() {
-        String res = fils1.genereInstructions();
-        res += fils2.genereInstructions();
-        res += "\tpop ebx\n";
-        res += "\tpop eax\n";
-        res += "\tdiv eax, ebx\n";
-        res += "\tpush eax\n";
-        return res;
-    }
-
-    private String InstructionsInt() {
-        String res = "\tmov eax, " + valeur + "\n";
-        res += "\tpush eax\n";
-        return res;
-    }
-
-    private String InstructionsLet() {
-        String res = fils2.genereInstructions();
-        res += "\tpop eax\n";
-        res += "\tmov " + fils1.valeur + ", eax\n";
-        res += "\tpush eax\n";
-        return res;
-    }
-
-    private String InstructionsPointVirgule() {
-        String res = fils1.genereInstructions();
-        res += "\tpop eax\n";
-        res += fils2.genereInstructions();
-        return res;
-    }
+    protected abstract String valeurToString();
 }
 

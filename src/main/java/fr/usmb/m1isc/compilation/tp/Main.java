@@ -1,7 +1,5 @@
 package fr.usmb.m1isc.compilation.tp;
 
-import java_cup.runtime.Symbol;
-
 import java.io.FileReader;
 import java.io.InputStreamReader;
 
@@ -15,9 +13,10 @@ public class Main {
 		@SuppressWarnings("deprecation")
 		parser p = new parser (yy);
 		ArbreAbstrait res = (ArbreAbstrait) p.parse().value;
+
 		System.out.println("Arbre genere : \n");
 		System.out.println(res.toString());
 		System.out.println("\n Code assembleur genere : \n");
-		System.out.println(res.toAsm());
+		System.out.println(res.genererAssembleur());
 	}
 }
