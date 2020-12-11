@@ -1,14 +1,14 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreAnd extends ArbreAbstrait {
     public ArbreAnd(ArbreAbstrait e1, ArbreAbstrait e2) {
     }
 
     @Override
-    public String genereInstructions() {
-        return null;
+    public void genereInstructions(CodeSegment codeSegment) {
     }
 
     @Override

@@ -1,16 +1,17 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 import fr.usmb.m1isc.compilation.tp.DataSegment;
 
 public class ArbreSemi extends ArbreAbstrait {
     public ArbreSemi(ArbreAbstrait f1, ArbreAbstrait f2) { super(f1, f2); }
 
     @Override
-    public String genereInstructions() {
-        String res = fils1.genereInstructions();
+    public void genereInstructions(CodeSegment codeSegment) {
+        String res = fils1.genereInstructions(codeSegment);
         res += "\tpop eax\n";
-        res += fils2.genereInstructions();
+        res += fils2.genereInstructions(codeSegment);
         return res;
     }
 

@@ -32,14 +32,13 @@ public abstract class ArbreAbstrait {
         genereDeclarations(dataSegment);
 
         //Génération des instruction
-        String codeSegment = "CODE SEGMENT\n";
-        codeSegment += genereInstructions();
-        codeSegment += "CODE ENDS";
+        CodeSegment codeSegment = new CodeSegment();
+        genereInstructions(codeSegment);
 
-        return dataSegment.toString() + codeSegment;
+        return dataSegment.toString() + codeSegment.toString();
     }
 
-    public abstract String genereInstructions();
+    public abstract void genereInstructions(CodeSegment codeSegment);
 
     public void genereDeclarations(DataSegment dataSegment){}
 

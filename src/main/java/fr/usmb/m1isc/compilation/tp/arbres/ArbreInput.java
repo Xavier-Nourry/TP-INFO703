@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreInput extends ArbreAbstrait {
     public ArbreInput(){
@@ -8,8 +9,7 @@ public class ArbreInput extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
-        return null;
+    public void genereInstructions(CodeSegment codeSegment) {
     }
 
     @Override

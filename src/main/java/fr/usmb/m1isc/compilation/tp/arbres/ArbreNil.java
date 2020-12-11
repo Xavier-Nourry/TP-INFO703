@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreNil extends ArbreAbstrait {
     public ArbreNil(){
@@ -8,7 +9,7 @@ public class ArbreNil extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
+    public void genereInstructions(CodeSegment codeSegment) {
         return null;
     }
 

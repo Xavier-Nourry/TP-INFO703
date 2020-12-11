@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreMoins extends ArbreAbstrait {
     public ArbreMoins(ArbreAbstrait f1, ArbreAbstrait f2){
@@ -8,9 +9,9 @@ public class ArbreMoins extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
-        String res = fils1.genereInstructions();
-        res += fils2.genereInstructions();
+    public void genereInstructions(CodeSegment codeSegment) {
+        String res = fils1.genereInstructions(codeSegment);
+        res += fils2.genereInstructions(codeSegment);
         res += "\tpop ebx\n";
         res += "\tpop eax\n";
         res += "\tsub eax, ebx\n";

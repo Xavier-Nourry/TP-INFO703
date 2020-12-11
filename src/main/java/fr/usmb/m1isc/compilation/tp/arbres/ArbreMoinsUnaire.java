@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreMoinsUnaire extends ArbreAbstrait {
     public ArbreMoinsUnaire(ArbreAbstrait fils1){
@@ -8,8 +9,8 @@ public class ArbreMoinsUnaire extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
-        String res = fils1.genereInstructions();
+    public void genereInstructions(CodeSegment codeSegment) {
+        String res = fils1.genereInstructions(codeSegment);
         res += "\tpop ebx\n";
         res += "\tmov eax, 0\n";
         res += "\tsub eax, ebx\n";
