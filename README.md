@@ -1,84 +1,145 @@
 Camille Morand - Xavier Nourry
 
-# TP Compilation : Génération d'arbres abstraits
+# TP Compilation : Génération de code pour un sous ensemble du langage λ-ada.
 
 ## Rendu:
 
-Les seuls fichiers modifiés sont: 
-- le fichier src/main/java/fr/usmb/m1isc/compilation/tp/ArbreAbstrait.java
-- le fichier src/main/cup/AnalyseurSyntaxique.cup
-                                  
-Pour faire tourner l'algorithme il faut build le projet avec gradle puis lancer le main.java. Le programme est plus rapide si on l'appelle directement avec un fichier source en argument.
+Le fichier src/main/cup/AnalyseurSyntaxique.cup a été modifié par rapport aux TP2 pour coller à un changement de la structure de l'arbre abstrait généré.  
+Les fichiers du dossier src/main/java/fr/usmb/m1isc/compilation/tp sont tous nouveaux ou modifiés depuis le TP2.
 
-##
-L'objectif du TP est d'utiliser les outils JFlex et CUP pour générer des arbres abstraits correspondant à un sous ensemble du langage **λ-ada**.
+Pour faire tourner l'algorithme il faut build le projet avec gradle puis lancer le main.java. Le programme est plus rapide si on l'appelle directement avec un fichier source en argument.
+En plus d'un fichier source, on peut passer le nom d'un fichier de destination pour l'assembleur (si on n'en passe pas le programme génèrera un dest.asm).  
+On peut ensuite utiliser l'émulateur sur le fichier généré :  
+`java -jar vm-0.9.jar dest.asm`
+ou
+`java -jar vm-0.9.jar dest.asm --debug`
+
+
+# 
+
+À partir de l'arbre abstrait construit lors du dernier TP, avec les outils JFlex et CUP, l'objectif consiste à générer du code pour la machine à registres décrite dans le cours, afin d'être en mesure d'exécuter les programmes reconnus par l'analyseur sur la machine à registres.
 
 ## Exercice 1 :
 
-Utiliser JFlex et CUP pour générer l'arbre abstrait correspondant à l'analyse d'expressions arithmétiques sur les nombres entiers.
+Dans la première partie du tp on pourra se limiter à la génération de code pour les expressions arithmétiques sur les nombres entiers.
 
-Exemple de fichier source pour l'analyseur :
-
-```
-12 + 5;             /* ceci est un commentaire */
-10 / 2 - 3;  99;    /* le point-virgule sépare les expressions à évaluer */
-/* l'évaluation donne toujours un nombre entier */
-((30 * 1) + 4) mod 2; /* opérateurs binaires */
-3 * -4;             /* attention à l'opérateur unaire */
-
-let prixHt = 200;   /* une variable prend valeur lors de sa déclaration */
-let prixTtc =  prixHt * 119 / 100;
-prixTtc + 100.
-```
-
-L'expression
+Ainsi, l'expression
 
 ```
-let prixTtc =  prixHt * 119 / 100;
-prixTtc + 100
+let prixHt = 200;
+let prixTtc =  prixHt * 119 / 100 .
 ```
-pourra donner, par exemple, l'arbre suivant :
+correspondant, par exemple, à l'arbre ci-dessous pourrait amener à la production du code suivant :
 
-![exemple arbre abtrait](arbre.png "arbre abstrait")
-
-Une fois l'arbre généré, récupérez le dans le programme pricipal et affichez le, par exemple sous la forme d'une expression préfixée parenthésée :
-`(; (LET prixTtc (/ (* prixHt 119) 100)) (+ prixTtc 100))`
+```
+DATA SEGMENT
+	prixHt DD
+	prixTtc DD
+DATA ENDS
+CODE SEGMENT
+	mov eax, 200
+	mov prixHt, eax
+	mov eax, prixHt
+	push eax
+	mov eax, 119
+	pop ebx
+	mul eax, ebx
+	push eax
+	mov eax, 100
+	pop ebx
+	div ebx, eax
+	mov eax, ebx
+	mov prixTtc, eax
+CODE ENDS
+```
+```
+; ──┬── LET ──┬── prixHt
+    │         │   
+    │         └── 200
+    │   
+    └── LET ──┬── prixTtc
+              │   
+              └── / ──┬── * ──┬── prixHt
+                      │       │   
+                      │       └── 119
+                      │   
+                      └── 100
+```
 
 ## Exercice 2 :
 
-Compléter la grammaire précédente en y ajoutant les opérateurs booléens, ceux de comparaison, la boucle et la conditionnelle, afin d'obtenir un sous-ensemble du langage **λ-ada** un peu plus complet.
+Étendre la génération de code aux opérateurs booléens, de comparaison, aux boucles et aux conditionnelles, correspondant au sous-ensemble du langage **λ-ada** utilisé pour le TP précédent.
 
-Grammaire abstraite du sous-ensemble de λ-ada correspondant :
-
-```
-expression → expression ';' expression  
-expression → LET IDENT '=' expression
-expression → IF expression THEN expression ELSE expression
-expression → WHILE expression DO expression
-expression → '-' expression
-expression → expression '+' expression
-expression → expression '-' expression
-expression → expression '*' expression
-expression → expression '/' expression
-expression → expression MOD expression
-expression → expression '<' expression
-expression → expression '<=' expression
-expression → expression '=' expression
-expression → expression AND expression
-expression → expression OR expression
-expression → NOT expression 
-expression → OUTPUT expression 
-expression → INPUT | NIL | IDENT | ENTIER
-```
-
-Le langage obtenu est tout de suite un peu plus intéressant et permet de programmer plus de choses.
-
-Exemple de programme possible pour le sous-ensemble de λ-ada considéré ici : calcul de PGCD.
+Exemple de code source pour le compilateur : calcul de PGCD.
 
 ```
 let a = input;
 let b = input;
 while (0 < b)
 do (let aux=(a mod b); let a=b; let b=aux );
-output a .
+output a
+.
 ```
+Et un exemple de code qui pourrait être produit :
+
+```
+DATA SEGMENT
+	b DD
+	a DD
+	aux DD
+DATA ENDS
+CODE SEGMENT
+	in eax
+	mov a, eax
+	in eax
+	mov b, eax
+debut_while_1:
+	mov eax, 0
+	push eax
+	mov eax, b
+	pop ebx
+	sub eax,ebx
+	jle faux_gt_1
+	mov eax,1
+	jmp sortie_gt_1
+faux_gt_1:
+	mov eax,0
+sortie_gt_1:
+	jz sortie_while_1
+	mov eax, b
+	push eax
+	mov eax, a
+	pop ebx
+	mov ecx,eax
+	div ecx,ebx
+	mul ecx,ebx
+	sub eax,ecx
+	mov aux, eax
+	mov eax, b
+	mov a, eax
+	mov eax, aux
+	mov b, eax
+	jmp debut_while_1
+sortie_while_1:
+	mov eax, a
+	out eax
+CODE ENDS
+```
+
+## Émulateur pour la machine à pile
+
+Vous trouverez un émulateur pour la machine à registres ici : [vm-0.9.jar](./vm-0.9.jar).
+
+Il s'utilise de la façon suivante :
+
+`java -jar vm-0.9.jar pgcd.asm`
+
+ou
+
+`java -jar vm-0.9.jar pgcd.asm --debug`
+
+## À rendre :
+
+À la fin du tp, vous ferez une présentation intermédiaire de votre compilateur, de l'ordre de 5 minutes, à l'enseignant qui vous encadre en tp.
+
+Avant le 4 janvier 2021, sous la forme d'un fichier d'un lien vers un dépot git, vous devez envoyer un petit compte-rendu avec des exemples bien choisis de génération de code et l'ensemble de vos fichiers source à l'enseignant qui vous encadre en tp (Stephane.Talbot@univ-smb.fr / Francois.Boussion@univ-smb.fr).
