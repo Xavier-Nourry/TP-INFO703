@@ -25,16 +25,18 @@ public class CodeSegment {
         }
     }
 
-    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, pop}
+    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, pop}
 
     ArrayList<Instruction> instructions;
     private int nbWhile;
     private int nbGt;
+    private int nbGte;
 
     public CodeSegment() {
         instructions = new ArrayList<>();
         nbWhile = 0;
         nbGt = 0;
+        nbGte = 0;
     }
 
     public void add(Operateur op, String operandes){
@@ -48,6 +50,10 @@ public class CodeSegment {
 
     public int nouveaugt() {
         return ++nbGt;
+    }
+
+    public int nouveaugte() {
+        return ++nbGte;
     }
 
     @Override
