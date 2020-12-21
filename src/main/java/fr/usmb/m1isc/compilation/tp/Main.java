@@ -1,5 +1,7 @@
 package fr.usmb.m1isc.compilation.tp;
 
+import fr.usmb.m1isc.compilation.tp.outils_fichier.FileTools;
+
 import java.io.FileReader;
 import java.io.InputStreamReader;
 
@@ -17,6 +19,6 @@ public class Main {
 		System.out.println("Arbre genere : \n");
 		System.out.println(res.toString());
 		System.out.println("\n Code assembleur genere : \n");
-		System.out.println(res.genererAssembleur());
+		FileTools.writeStringIntoFile(args[1], res.genererAssembleur());
 	}
 }
