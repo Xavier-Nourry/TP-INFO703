@@ -8,8 +8,10 @@ public abstract class ArbreAbstrait {
     protected ArbreAbstrait fils2;
     protected ArbreAbstrait fils3;
 
-    // Indique si au le noeud est une feuille (utilisé pour l'affichage)
+    // Indique si le noeud est une feuille (utilisé pour l'affichage)
     private boolean estFeuille;
+
+    // Indique si l'arbre contient des erreurs (si c'est le cas on empêche la génération de l'assembleur)
     protected Boolean contientErreurs;
 
     // On fait différents constructeurs selon le nombre de fils
@@ -30,9 +32,9 @@ public abstract class ArbreAbstrait {
     }
 
     public void genererAssembleur(String nomFichier){
-        if (contientErreurs()) {
+        if (contientErreurs())  // Si il y a des erreurs inutile de générer l'assembleur
             System.out.println("On ne peut pas generer le code assembleur, il y a des erreurs dans le code");
-        }
+
         //Génération des déclarations
         DataSegment dataSegment = new DataSegment();
         genereDeclarations(dataSegment);
@@ -46,14 +48,17 @@ public abstract class ArbreAbstrait {
         FileTools.writeStringIntoFile(nomFichier, code);
     }
 
+    // Indique si l'arbre contient des erreurs
     private boolean contientErreurs() {
-        if (contientErreurs == null)
+        if (contientErreurs == null) // Si on a jamais cherché s'il contenait des erreurs, on regarde si les fils en contiennent
             contientErreurs = ((fils1 != null && fils1.contientErreurs()) || (fils2 != null && fils2.contientErreurs()) || (fils3!= null && fils3.contientErreurs()));
         return contientErreurs;
     }
 
+    // Génère les instruction pour le noeud courant de l'arbre (la génération des fils sera appelée dans cette fonction, à différents endroit selon le type de noeud
     public abstract void genereInstructions(CodeSegment codeSegment);
 
+    // Génère les déclaration pour le noeud courant de l'arbre (la génération des fils sera éventuellement appelée dans cette fonction, à différents endroit selon le type de noeud
     public void genereDeclarations(DataSegment dataSegment){}
 
     // Affiche l'arbre sous la forme d'une expression préfixée parenthésée
@@ -70,6 +75,7 @@ public abstract class ArbreAbstrait {
         return res;
     }
 
+    // Retourne sous forme de String la valeur à afficher pour le noeud courant
     protected abstract String valeurToString();
 }
 
