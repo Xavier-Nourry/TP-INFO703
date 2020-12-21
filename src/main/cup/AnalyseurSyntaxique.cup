@@ -69,7 +69,7 @@ expression ::= expr:e {:RESULT = e;:}
              | LET IDENT:nom EGAL expr:e {:RESULT = new ArbreLet(new ArbreIdent(nom), e);:}
              | WHILE expr:cond DO expression:e {:RESULT = new ArbreWhile(cond, e);:}
              | IF expr:cond THEN expression:a1 ELSE expression:a2 {:RESULT = new ArbreIf(cond, a1, a2);:}
-             | error {:RESULT = new ArbreError();:} // reprise d'erreurs
+             | error:e {:report_error("Le code contient une erreur, il ne peut pas etre parse et converti en assembleur", e); RESULT = new ArbreError();:} // reprise d'erreurs
 			 ;
 
 // 
