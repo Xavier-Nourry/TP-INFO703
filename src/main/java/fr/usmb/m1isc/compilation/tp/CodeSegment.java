@@ -17,7 +17,10 @@ public class CodeSegment {
                 case debut_while:
                 case faux_gt:
                 case sortie_gt:
+                case faux_gte:
+                case sortie_gte:
                 case sortie_while:
+                case debut_else:
                     return operateur.name() + "_" + operandes + ":";
                 default:
                     return "\t" + operateur.name() + " " + operandes;
@@ -25,18 +28,20 @@ public class CodeSegment {
         }
     }
 
-    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, pop}
+    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, debut_else, pop}
 
     ArrayList<Instruction> instructions;
     private int nbWhile;
     private int nbGt;
     private int nbGte;
+    private int nbIf;
 
     public CodeSegment() {
         instructions = new ArrayList<>();
         nbWhile = 0;
         nbGt = 0;
         nbGte = 0;
+        nbIf = 0;
     }
 
     public void add(Operateur op, String operandes){
@@ -54,6 +59,10 @@ public class CodeSegment {
 
     public int nouveaugte() {
         return ++nbGte;
+    }
+
+    public int nouveauIf() {
+        return ++nbIf;
     }
 
     @Override

@@ -4,7 +4,7 @@ public abstract class ArbreAbstrait {
     // Fils de l'arbre
     protected ArbreAbstrait fils1;
     protected ArbreAbstrait fils2;
-    private ArbreAbstrait fils3;
+    protected ArbreAbstrait fils3;
 
     // Indique si au le noeud est une feuille (utilisé pour l'affichage)
     private boolean estFeuille;
