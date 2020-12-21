@@ -3,15 +3,22 @@ package fr.usmb.m1isc.compilation.tp.arbres;
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
 
 public class ArbreNot extends ArbreAbstrait {
-    public boolean valeur;
-    public ArbreNot(ArbreAbstrait valeur){
-        super();
-        //this.valeur = valeur;
+    public int valeur;
+
+    public ArbreNot(ArbreAbstrait tree){ //TODO : constructeur à vérifier
+        this.valeur = ((ArbreEntier)tree).valeur;
     }
 
     @Override
     public String genereInstructions() {
-        return null;
+        String res = "\tmov eax "+ valeur +"\n";
+        res += "\tpush eax\n";
+        res += "\tjz not_retourne_vrai\n";
+        res += "\tpush 0\n";
+        res += "\tnot_retourne_vrai:\n";
+        res += "\t\tpush 1\n";
+
+        return res;
     }
 
     @Override
