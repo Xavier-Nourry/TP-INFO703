@@ -10,11 +10,13 @@ public class ArbreInput extends ArbreAbstrait {
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
+        codeSegment.add(CodeSegment.Operateur.in, "eax");
+        codeSegment.add(CodeSegment.Operateur.push, "eax");
     }
 
     @Override
     protected String valeurToString() {
-        return null;
+        return "INPUT";
     }
 
 }
