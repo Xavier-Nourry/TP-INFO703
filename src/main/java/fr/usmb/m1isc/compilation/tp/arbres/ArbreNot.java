@@ -4,26 +4,24 @@ import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
 import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreNot extends ArbreAbstrait {
-    public int valeur;
-
-    public ArbreNot(ArbreAbstrait tree){ //TODO : constructeur à vérifier
-        this.valeur = ((ArbreEntier)tree).valeur;
+    public ArbreNot(ArbreAbstrait f1){ //TODO : constructeur à vérifier
+        super(f1);
     }
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
-        String res = "\tmov eax "+ valeur +"\n";
-        res += "\tpush eax\n";
-        res += "\tjz not_retourne_vrai\n";
-        res += "\tpush 0\n";
-        res += "\tnot_retourne_vrai:\n";
-        res += "\t\tpush 1\n"; //TODO : voir si nécessaire de 'pop' des registres
-
-        //return res;
+        int numero = codeSegment.nouveauNot();
+        fils1.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.jnz, CodeSegment.Operateur.faux_not.name() + "_" + numero);
+        codeSegment.add(CodeSegment.Operateur.mov, "eax, 1");
+        codeSegment.add(CodeSegment.Operateur.jmp, CodeSegment.Operateur.sortie_not.name() + "_" + numero);
+        codeSegment.add(CodeSegment.Operateur.faux_not, String.valueOf(numero));
+        codeSegment.add(CodeSegment.Operateur.mov, "eax, 0");
+        codeSegment.add(CodeSegment.Operateur.sortie_not, String.valueOf(numero));
     }
 
     @Override
     protected String valeurToString() {
-        return null;
+        return "NOT";
     }
 }
