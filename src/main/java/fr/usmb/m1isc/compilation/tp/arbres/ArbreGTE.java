@@ -10,7 +10,7 @@ public class ArbreGTE extends ArbreAbstrait {
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
-        int numero = codeSegment.nouveaugte();
+        int numero = codeSegment.nouveauGTE();
         new ArbreMoins(fils2, fils1).genereInstructions(codeSegment);
         codeSegment.add(CodeSegment.Operateur.pop, "eax");
         codeSegment.add(CodeSegment.Operateur.jl, CodeSegment.Operateur.faux_gte.name() + "_" + numero);
