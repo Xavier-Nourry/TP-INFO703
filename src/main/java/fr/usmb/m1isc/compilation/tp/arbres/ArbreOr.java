@@ -21,7 +21,7 @@ public class ArbreOr extends ArbreAbstrait {
         res += "\tjnz or_retourne_vrai\n";
         res += "\tpush 0\n";
         res += "\tor_retourne_vrai:\n";
-        res += "\t\tpush 1\n"; //TODO : voir si nécessaire de 'pop ebx'
+        res += "\t\tpush 1\n"; //TODO : voir si nécessaire de 'pop' des registres
 
         return res;
     }

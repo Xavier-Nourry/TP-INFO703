@@ -16,7 +16,7 @@ public class ArbreNot extends ArbreAbstrait {
         res += "\tjz not_retourne_vrai\n";
         res += "\tpush 0\n";
         res += "\tnot_retourne_vrai:\n";
-        res += "\t\tpush 1\n";
+        res += "\t\tpush 1\n"; //TODO : voir si nécessaire de 'pop' des registres
 
         return res;
     }
