@@ -24,7 +24,7 @@ public class ArbreOr extends ArbreAbstrait {
         res += "\tor_retourne_vrai:\n";
         res += "\t\tpush 1\n"; //TODO : voir si nécessaire de 'pop' des registres
 
-        return res;
+        //return res;
     }
 
     @Override

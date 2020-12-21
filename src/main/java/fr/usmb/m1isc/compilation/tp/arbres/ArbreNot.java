@@ -19,7 +19,7 @@ public class ArbreNot extends ArbreAbstrait {
         res += "\tnot_retourne_vrai:\n";
         res += "\t\tpush 1\n"; //TODO : voir si nécessaire de 'pop' des registres
 
-        return res;
+        //return res;
     }
 
     @Override

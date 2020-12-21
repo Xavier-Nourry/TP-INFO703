@@ -19,6 +19,8 @@ public class CodeSegment {
                 case sortie_gt:
                 case faux_gte:
                 case sortie_gte:
+                case faux_egal:
+                case sortie_egal:
                 case sortie_while:
                 case debut_else:
                 case sortie_if:
@@ -29,12 +31,13 @@ public class CodeSegment {
         }
     }
 
-    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, debut_else, sortie_if, pop}
+    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, debut_else, sortie_if, faux_egal, sortie_egal, jnz, pop}
 
     ArrayList<Instruction> instructions;
     private int nbWhile;
     private int nbGt;
     private int nbGte;
+    private int nbEgal;
     private int nbIf;
 
     public CodeSegment() {
@@ -42,6 +45,7 @@ public class CodeSegment {
         nbWhile = 0;
         nbGt = 0;
         nbGte = 0;
+        nbEgal = 0;
         nbIf = 0;
     }
 
@@ -54,12 +58,16 @@ public class CodeSegment {
         return ++nbWhile;
     }
 
-    public int nouveaugt() {
+    public int nouveauGT() {
         return ++nbGt;
     }
 
-    public int nouveaugte() {
+    public int nouveauGTE() {
         return ++nbGte;
+    }
+
+    public int nouveauEgal() {
+        return ++nbEgal;
     }
 
     public int nouveauIf() {

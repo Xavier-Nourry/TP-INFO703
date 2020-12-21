@@ -23,7 +23,7 @@ public class ArbreAnd extends ArbreAbstrait {
         res += "\tpush 1\n";
         res += "\tand_retourne_faux:\n";
         res += "\t\tpush 0\n"; //TODO : voir si nécessaire de 'pop ebx'
-        return res;
+        //return res;
     }
 
     @Override

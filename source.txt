@@ -1,6 +1,3 @@
-let a = input;
-let b = input;
-while (0 < b)
-do (let aux=(a mod b); let a=b; let b=aux );
-output a
+if 5 = 5 then output 9 else output 2;
+if 6 = 5 then output 9 else output 2
 .
