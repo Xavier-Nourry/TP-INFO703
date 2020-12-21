@@ -9,10 +9,9 @@ public class ArbreSemi extends ArbreAbstrait {
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
-        String res = fils1.genereInstructions(codeSegment);
-        res += "\tpop eax\n";
-        res += fils2.genereInstructions(codeSegment);
-        return res;
+        fils1.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.pop, "eax");
+        fils2.genereInstructions(codeSegment);
     }
 
     @Override

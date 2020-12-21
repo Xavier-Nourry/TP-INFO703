@@ -12,7 +12,7 @@ public class ArbreNot extends ArbreAbstrait {
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
-        return null;
+
     }
 
     @Override

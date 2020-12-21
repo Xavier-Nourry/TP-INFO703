@@ -3,7 +3,7 @@ package fr.usmb.m1isc.compilation.tp;
 import java.util.ArrayList;
 
 public class CodeSegment {
-    private class Instruction{
+    private static class Instruction{
         private final Operateur operateur;
         private final String operandes; //TODO faudra peut-être changer ça si on veut optimiser
 
@@ -18,11 +18,11 @@ public class CodeSegment {
         }
     }
 
-    public enum Operateur{div, push, mov, mul, sub, pop}
+    public enum Operateur{div, push, mov, mul, sub, add, pop}
 
     ArrayList<Instruction> instructions;
     public CodeSegment() {
-        instructions = new ArrayList<Instruction>();
+        instructions = new ArrayList<>();
     }
 
     public void add(Operateur op, String operandes){
@@ -32,10 +32,10 @@ public class CodeSegment {
 
     @Override
     public String toString() {
-        String res = "CODE SEGMENT\n";
-        for (int i = 0; i < instructions.size(); i++)
-            res += "\t" + instructions.get(i).toString() + "\n";
-        res += "CODE ENDS\n";
-        return res;
+        StringBuilder res = new StringBuilder("CODE SEGMENT\n");
+        for (Instruction instruction : instructions)
+            res.append("\t").append(instruction.toString()).append("\n");
+        res.append("CODE ENDS\n");
+        return res.toString();
     }
 }

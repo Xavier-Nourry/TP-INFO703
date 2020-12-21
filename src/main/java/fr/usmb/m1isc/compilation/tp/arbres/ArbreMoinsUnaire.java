@@ -10,12 +10,11 @@ public class ArbreMoinsUnaire extends ArbreAbstrait {
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
-        String res = fils1.genereInstructions(codeSegment);
-        res += "\tpop ebx\n";
-        res += "\tmov eax, 0\n";
-        res += "\tsub eax, ebx\n";
-        res += "\tpush eax\n";
-        return res;
+        fils1.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.pop, "ebx");
+        codeSegment.add(CodeSegment.Operateur.mov, "eax, 0");
+        codeSegment.add(CodeSegment.Operateur.sub, "eax, ebx");
+        codeSegment.add(CodeSegment.Operateur.push, "eax");
     }
 
     @Override

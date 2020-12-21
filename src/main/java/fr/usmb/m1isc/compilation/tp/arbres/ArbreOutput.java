@@ -13,7 +13,6 @@ public class ArbreOutput extends ArbreAbstrait {
 
     @Override
     public void genereInstructions(CodeSegment codeSegment) {
-        return null;
     }
 
     @Override
