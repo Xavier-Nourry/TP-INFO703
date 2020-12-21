@@ -15,8 +15,10 @@ public class ArbreIf extends ArbreAbstrait {
         fils1.genereInstructions(codeSegment);
         codeSegment.add(CodeSegment.Operateur.jz, CodeSegment.Operateur.debut_else.name() + "_" + numero);
         fils2.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.jmp, CodeSegment.Operateur.sortie_if.name() + "_" + numero);
         codeSegment.add(CodeSegment.Operateur.debut_else, String.valueOf(numero));
         fils3.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.sortie_if, String.valueOf(numero));
     }
 
     @Override

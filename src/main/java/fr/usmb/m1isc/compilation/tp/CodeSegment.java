@@ -21,6 +21,7 @@ public class CodeSegment {
                 case sortie_gte:
                 case sortie_while:
                 case debut_else:
+                case sortie_if:
                     return operateur.name() + "_" + operandes + ":";
                 default:
                     return "\t" + operateur.name() + " " + operandes;
@@ -28,7 +29,7 @@ public class CodeSegment {
         }
     }
 
-    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, debut_else, pop}
+    public enum Operateur{div, push, mov, mul, sub, add, in, debut_while, jz, sortie_while, jmp, jle, faux_gt, sortie_gt, out, jl, faux_gte, sortie_gte, debut_else, sortie_if, pop}
 
     ArrayList<Instruction> instructions;
     private int nbWhile;
