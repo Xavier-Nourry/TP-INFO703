@@ -4,10 +4,11 @@ public abstract class ArbreAbstrait {
     // Fils de l'arbre
     protected ArbreAbstrait fils1;
     protected ArbreAbstrait fils2;
-    private ArbreAbstrait fils3;
+    protected ArbreAbstrait fils3;
 
     // Indique si au le noeud est une feuille (utilisé pour l'affichage)
     private boolean estFeuille;
+    protected Boolean contientErreurs;
 
     // On fait différents constructeurs selon le nombre de fils
     public ArbreAbstrait(){
@@ -27,19 +28,28 @@ public abstract class ArbreAbstrait {
     }
 
     public String genererAssembleur(){
+        if (contientErreurs()) {
+            System.out.println("On ne peut pas generer le code assembleur, il y a des erreurs dans le code");
+            return "";
+        }
         //Génération des déclarations
         DataSegment dataSegment = new DataSegment();
         genereDeclarations(dataSegment);
 
         //Génération des instruction
-        String codeSegment = "CODE SEGMENT\n";
-        codeSegment += genereInstructions();
-        codeSegment += "CODE ENDS";
+        CodeSegment codeSegment = new CodeSegment();
+        genereInstructions(codeSegment);
 
-        return dataSegment.toString() + codeSegment;
+        return dataSegment.toString() + codeSegment.toString();
     }
 
-    public abstract String genereInstructions();
+    private boolean contientErreurs() {
+        if (contientErreurs == null)
+            contientErreurs = ((fils1 != null && fils1.contientErreurs()) || (fils2 != null && fils2.contientErreurs()) || (fils3!= null && fils3.contientErreurs()));
+        return contientErreurs;
+    }
+
+    public abstract void genereInstructions(CodeSegment codeSegment);
 
     public void genereDeclarations(DataSegment dataSegment){}
 

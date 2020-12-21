@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreMul extends ArbreAbstrait {
     public ArbreMul(ArbreAbstrait f1, ArbreAbstrait f2){
@@ -8,14 +9,13 @@ public class ArbreMul extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
-        String res = fils1.genereInstructions();
-        res += fils2.genereInstructions();
-        res += "\tpop ebx\n";
-        res += "\tpop eax\n";
-        res += "\tmul eax, ebx\n";
-        res += "\tpush eax\n";
-        return res;
+    public void genereInstructions(CodeSegment codeSegment) {
+        fils1.genereInstructions(codeSegment);
+        fils2.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.pop, "ebx");
+        codeSegment.add(CodeSegment.Operateur.pop, "eax");
+        codeSegment.add(CodeSegment.Operateur.mul, "eax, ebx");
+        codeSegment.add(CodeSegment.Operateur.push, "eax");
     }
 
     @Override

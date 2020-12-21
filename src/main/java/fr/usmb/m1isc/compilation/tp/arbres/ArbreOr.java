@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreOr extends ArbreAbstrait {
     private ArbreEntier fils1;
@@ -12,7 +13,7 @@ public class ArbreOr extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
+    public void genereInstructions(CodeSegment codeSegment) {
         String res = "\tmov eax "+ fils1.valeur +"\n";
         res += "\tpush eax\n";
         res += "\tjnz or_retourne_vrai\n";

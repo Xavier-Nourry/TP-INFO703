@@ -1,6 +1,7 @@
 package fr.usmb.m1isc.compilation.tp.arbres;
 
 import fr.usmb.m1isc.compilation.tp.ArbreAbstrait;
+import fr.usmb.m1isc.compilation.tp.CodeSegment;
 
 public class ArbreMoins extends ArbreAbstrait {
     public ArbreMoins(ArbreAbstrait f1, ArbreAbstrait f2){
@@ -8,13 +9,18 @@ public class ArbreMoins extends ArbreAbstrait {
     }
 
     @Override
-    public String genereInstructions() {
-        return null;
+    public void genereInstructions(CodeSegment codeSegment) {
+        fils1.genereInstructions(codeSegment);
+        fils2.genereInstructions(codeSegment);
+        codeSegment.add(CodeSegment.Operateur.pop, "ebx");
+        codeSegment.add(CodeSegment.Operateur.pop, "eax");
+        codeSegment.add(CodeSegment.Operateur.sub, "eax, ebx");
+        codeSegment.add(CodeSegment.Operateur.push, "eax");
     }
 
     @Override
     protected String valeurToString() {
-        return null;
+        return "-";
     }
 
 }
