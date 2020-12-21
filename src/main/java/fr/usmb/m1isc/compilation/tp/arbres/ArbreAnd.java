@@ -13,12 +13,12 @@ public class ArbreAnd extends ArbreAbstrait {
     public void genereInstructions(CodeSegment codeSegment) {
         int numero = codeSegment.nouveauAnd();
         fils1.genereInstructions(codeSegment);
-        codeSegment.add(CodeSegment.Operateur.jz, CodeSegment.Operateur.faux_end.name() + "_" + numero);
+        codeSegment.add(CodeSegment.Operateur.jz, CodeSegment.Operateur.faux_and.name() + "_" + numero);
         fils2.genereInstructions(codeSegment);
-        codeSegment.add(CodeSegment.Operateur.jz, CodeSegment.Operateur.faux_end.name() + "_" + numero);
+        codeSegment.add(CodeSegment.Operateur.jz, CodeSegment.Operateur.faux_and.name() + "_" + numero);
         codeSegment.add(CodeSegment.Operateur.mov, "eax, 1");
         codeSegment.add(CodeSegment.Operateur.jmp, CodeSegment.Operateur.sortie_and.name() + "_" + numero);
-        codeSegment.add(CodeSegment.Operateur.faux_end, String.valueOf(numero));
+        codeSegment.add(CodeSegment.Operateur.faux_and, String.valueOf(numero));
         codeSegment.add(CodeSegment.Operateur.mov, "eax, 0");
         codeSegment.add(CodeSegment.Operateur.sortie_and, String.valueOf(numero));
     }
