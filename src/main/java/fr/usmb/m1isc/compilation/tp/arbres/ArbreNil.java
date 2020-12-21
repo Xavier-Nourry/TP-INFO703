@@ -14,6 +14,6 @@ public class ArbreNil extends ArbreAbstrait {
 
     @Override
     protected String valeurToString() {
-        return null;
+        return "NIL";
     }
 }
