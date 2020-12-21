@@ -23,6 +23,6 @@ public class ArbreEgal extends ArbreAbstrait {
 
     @Override
     protected String valeurToString() {
-        return null;
+        return "=";
     }
 }
