@@ -1,5 +1,7 @@
 package fr.usmb.m1isc.compilation.tp;
 
+import fr.usmb.m1isc.compilation.tp.outils_fichier.FileTools;
+
 public abstract class ArbreAbstrait {
     // Fils de l'arbre
     protected ArbreAbstrait fils1;
@@ -27,10 +29,9 @@ public abstract class ArbreAbstrait {
         estFeuille = false;
     }
 
-    public String genererAssembleur(){
+    public void genererAssembleur(String nomFichier){
         if (contientErreurs()) {
             System.out.println("On ne peut pas generer le code assembleur, il y a des erreurs dans le code");
-            return "";
         }
         //Génération des déclarations
         DataSegment dataSegment = new DataSegment();
@@ -40,7 +41,9 @@ public abstract class ArbreAbstrait {
         CodeSegment codeSegment = new CodeSegment();
         genereInstructions(codeSegment);
 
-        return dataSegment.toString() + codeSegment.toString();
+        // Ecriture du code dans un fichier
+        String code = dataSegment.toString() + codeSegment.toString();
+        FileTools.writeStringIntoFile(nomFichier, code);
     }
 
     private boolean contientErreurs() {

@@ -9,9 +9,9 @@ public class FileTools { //TODO : cette classe devrait être static mais l'IDE n
             FileWriter myWriter = new FileWriter("./" + fileName);
             myWriter.write(toWrite);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("L'assembleur a bien ete ecrit dans le fichier " + fileName);
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Une erreur est survenue lors de l'écriture du fichier");
             e.printStackTrace();
         }
     }

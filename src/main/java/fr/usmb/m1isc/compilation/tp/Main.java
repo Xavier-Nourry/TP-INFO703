@@ -18,7 +18,6 @@ public class Main {
 
 		System.out.println("Arbre genere : \n");
 		System.out.println(res.toString());
-		System.out.println("\n Code assembleur genere : \n");
-		FileTools.writeStringIntoFile(args[1], res.genererAssembleur());
+		res.genererAssembleur((args.length > 1)?args[1]:"dest.asm");
 	}
 }
