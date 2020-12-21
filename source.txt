@@ -1,1 +1,1 @@
-let res = 200 and 0.
+let res = 200 or 0.

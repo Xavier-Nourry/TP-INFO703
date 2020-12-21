@@ -6,7 +6,7 @@ public class ArbreAnd extends ArbreAbstrait {
     private ArbreEntier e1;
     private ArbreEntier e2;
 
-    public ArbreAnd(ArbreAbstrait e1, ArbreAbstrait e2) {
+    public ArbreAnd(ArbreAbstrait e1, ArbreAbstrait e2) { //TODO : constructeur à vérifier
         this.e1 = (ArbreEntier) e1;
         this.e2 = (ArbreEntier) e2;
     }
@@ -21,7 +21,7 @@ public class ArbreAnd extends ArbreAbstrait {
         res += "\tjz and_retourne_faux\n";
         res += "\tpush 1\n";
         res += "\tand_retourne_faux:\n";
-        res += "\t\tpush 0\n"; //TODO : voir si nécessaire de pop ebx
+        res += "\t\tpush 0\n"; //TODO : voir si nécessaire de 'pop ebx'
 
         return res;
     }
